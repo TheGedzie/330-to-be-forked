@@ -1,17 +1,19 @@
 #!/bin/bash
 
-echo Введите название курса
-read predmet
+read -p "Укажите название курса: " course_name
 
-touch $predmet.txt
+mkdir "$course_name"
 
-echo Сколько студентов в группе?
-read $kolvo
+mkdir "$course_name/Студенты"
 
-while[1 <= $kolvo]
-do
-  echo "Student:"
-  read $student >> $predmet.txt
-  done 
+grades_file="$course_name/Оценки.txt"
+touch "$grades_file"
 
+read -p "Сколько студентов в группе? " student_count
 
+for ((i=1; i<=student_count; i++));
+do 
+read -p "Студент $i: " student_name
+read -p "Введите оценку для $student_name: " grade echo "Студент: $student_name, Оценка: $grade" >> "$grades_file"
+done
+echo "Оценки добавлены в файл \"Оценки.txt\" для курса \"$course_name\"."
